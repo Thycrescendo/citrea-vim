@@ -1,70 +1,225 @@
-# Getting Started with Create React App
+Here is your content perfectly formatted as a `README.md` file:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+````markdown
+# Citrea-Vim: Trustless Bitcoin Options Trading on Citrea zkEVM
 
-## Available Scripts
+![Citrea-Vim Logo](src/assets/logo.png)
 
-In the project directory, you can run:
+**Built for the Citrea WaveHack Buildathon - Wave 1 Submission**  
+**Launch Date:** June 29, 2025  
+**Author:** [Your Name or Team Name]  
+**GitHub:** [Your GitHub Repository URL]  
 
-### `npm start`
+Welcome to **Citrea-Vim**, a pioneering trustless, on-chain platform for trading Bitcoin options using Citrea’s zkEVM technology. This project transforms Bitcoin’s liquidity into a DeFi powerhouse, offering secure, non-custodial call and put options trading with real-time pricing and DeFi composability. Built during the Citrea WaveHack, Citrea-Vim showcases innovative use cases for Citrea’s Layer 2 solution, bridging Bitcoin’s security with advanced financial tools.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## What is Citrea-Vim?
 
-### `npm test`
+Citrea-Vim is your gateway to decentralized Bitcoin options trading. Leveraging Citrea’s zero-knowledge rollup and zkEVM, it enables users to trade options without intermediaries, secured by zero-knowledge proofs. The sleek React frontend, styled with Tailwind CSS, provides a modern, dark-themed interface with teal accents, featuring a trading dashboard, portfolio tracker, and wallet integration via MetaMask on Citrea Testnet.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Tagline**: "Trade Bitcoin Options Trustlessly, Powered by Citrea."
+- **10-Word Description**: Trustless Bitcoin options trading on Citrea zkEVM, secure, DeFi-integrated.
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Features
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- ✅ **Trustless Trading**: Non-custodial options trading using zkEVM and Bitcoin Light Client.
+- 📈 **Real-Time Pricing**: Mock oracles (to be replaced with Chainlink) for accurate BTC pricing.
+- 🖥️ **User-Friendly UI**: Responsive design with React and Tailwind CSS, optimized for desktop and mobile.
+- 📊 **Portfolio Management**: Track purchased call/put options in a dedicated dashboard.
+- 🧩 **DeFi Composability**: Foundation for future integrations with DeFi protocols.
+- 🔐 **Secure Integration**: Utilizes Citrea’s Schnorr precompile and OP Stack with Celestia for L3 scaling.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## About the Build
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### What It Does
+Citrea-Vim empowers users to trade Bitcoin options on Citrea’s zkEVM, blending cutting-edge zero-knowledge proofs with a stunning, real-time trading interface.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### The Problem It Solves
+It eliminates custody risks associated with centralized exchanges and bridges Bitcoin’s limited smart contract capabilities with the innovative world of DeFi.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Challenges I Ran Into
+- Adapting to zkEVM constraints and Bitcoin Light Client integration.
+- MetaMask connection issues with Citrea Testnet.
+- Simulating accurate oracles in absence of live feeds.
+- UI responsiveness and Tailwind CSS quirks on smaller screens.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Technologies I Used
+- **Frontend**: React, Tailwind CSS, Ethers.js, @web3modal/react, wagmi, react-router-dom
+- **Smart Contracts**: Solidity, Hardhat, Remix (Shanghai EVM)
+- **Chain**: Citrea Testnet (Chain ID: 5115, RPC: https://rpc.testnet.citrea.xyz)
+- **Security**: Bitcoin Light Client, Schnorr precompile, OP Stack + Celestia
 
-## Learn More
+### How We Built It
+- Bootstrapped React app with Tailwind CSS and routing.
+- Deployed Solidity contracts on Citrea via Remix.
+- Wallet connectivity via Web3Modal and Wagmi hooks.
+- L3 appchain setup using OP Stack and Celestia finalized by 08:38 AM, June 29, 2025.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### What We Learned
+- How to integrate zkEVM with Bitcoin’s ecosystem.
+- Importance of seamless wallet UX and oracle integrations.
+- Smart contract gas optimization and modular frontend development.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### What's Next for Citrea-Vim
+- 🔄 Integrate Chainlink BTC/USD live oracle
+- ⚙️ Add multi-user settlement features
+- 🚀 Scale L3 appchain performance
+- 📱 Launch mobile-first UI and collaborate with DeFi protocols
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Getting Started
 
-### Analyzing the Bundle Size
+### Prerequisites
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- **Node.js**: v14.x or v16.x – [Install Node.js](https://nodejs.org/)
+- **npm**: Comes with Node.js
+- **MetaMask**: Add Citrea Testnet (Chain ID: 5115, RPC: https://rpc.testnet.citrea.xyz)
+- **cBTC Tokens**: Obtain via Citrea faucet
 
-### Making a Progressive Web App
+### Installation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+git clone [Your GitHub Repository URL]
+cd citrea-vim
+npm install
+npm install tailwindcss@3.4.17 postcss@8 autoprefixer@10 ethers@5 react-router-dom@6 @web3modal/ethereum @web3modal/react wagmi --legacy-peer-deps
+npx tailwindcss init -p
+````
 
-### Advanced Configuration
+### Start the App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```bash
+npm start
+```
 
-### Deployment
+Visit `http://localhost:3000` to view the app.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## Deploying Smart Contracts
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Install and initialize Hardhat:
+
+```bash
+npm install --save-dev hardhat
+npx hardhat init
+```
+
+2. Configure `hardhat.config.js`:
+
+```js
+module.exports = {
+  solidity: "0.8.25",
+  networks: {
+    citrea: {
+      url: "https://rpc.testnet.citrea.xyz",
+      chainId: 5115,
+      accounts: [`0x${process.env.PRIVATE_KEY}`],
+    },
+  },
+};
+```
+
+3. Deploy:
+
+```bash
+npx hardhat run scripts/deploy.js --network citrea
+```
+
+> **Note**: Add `.env` with `PRIVATE_KEY=your_private_key` and include `.env` in `.gitignore`.
+
+---
+
+## Folder Structure
+
+```
+citrea-vim/
+├── node_modules/
+├── public/
+│   ├── index.html
+│   ├── favicon.ico
+│   ├── manifest.json
+│   └── logo192.png
+├── src/
+│   ├── components/
+│   │   ├── Home.jsx
+│   │   ├── Navbar.jsx
+│   │   ├── TradingDashboard.jsx
+│   │   └── Footer.jsx
+│   ├── assets/
+│   │   ├── logo.png
+│   │   └── banner.jpg
+│   ├── utils/
+│   │   ├── web3.js
+│   │   └── constants.js
+│   ├── App.jsx
+│   ├── index.js
+│   └── index.css
+├── contracts/
+│   ├── CitreaVim.sol
+│   ├── Migrations.sol
+│   └── test/
+│       └── CitreaVim.test.js
+├── scripts/
+│   ├── deploy.js
+│   └── setup.js
+├── .gitignore
+├── package.json
+├── package-lock.json
+├── tailwind.config.js
+├── postcss.config.js
+├── hardhat.config.js
+├── README.md
+└── .env
+```
+
+---
+
+## Contributing
+
+We welcome your contributions! To get started:
+
+1. Fork the repo
+2. Create a new branch: `git checkout -b feature-name`
+3. Commit your changes: `git commit -m "Add feature"`
+4. Push: `git push origin feature-name`
+5. Open a pull request
+
+Let’s shape Bitcoin DeFi together!
+
+---
+
+## License
+
+This project is licensed under the MIT License.
+See the [LICENSE.md](LICENSE.md) file for details.
+
+---
+
+## Acknowledgments
+
+* 💡 **Citrea Team** – For enabling zkEVM and L2 Bitcoin scalability
+* 🤖 **xAI/Grok 3** – For helpful coding guidance and creativity boosts
+* 🌊 **WaveHack Community** – For the support, feedback, and camaraderie
+
+---
+
+## Visuals
+
+* **Logo**: A teal Bitcoin symbol next to bold "Citrea-Vim"
+* **UI Preview**: Real-time trading dashboard in a dark mode layout with teal charts and portfolio analytics
+
+---
+
+*This README will evolve as Citrea-Vim grows. Stay tuned for future updates and WaveHack progress milestones.*
+
+```
+
+Let me know if you'd like to auto-generate the logo banner or update it with contributors, changelogs, or deployment links!
+```
