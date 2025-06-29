@@ -69,7 +69,7 @@ It eliminates custody risks associated with centralized exchanges and bridges Bi
 ### Installation
 
 ```bash
-git clone [Your GitHub Repository URL]
+git clone https://github.com/Thycrescendo/citrea-vim
 cd citrea-vim
 npm install
 npm install tailwindcss@3.4.17 postcss@8 autoprefixer@10 ethers@5 react-router-dom@6 @web3modal/ethereum @web3modal/react wagmi --legacy-peer-deps
@@ -120,54 +120,8 @@ npx hardhat run scripts/deploy.js --network citrea
 
 ---
 
-## Folder Structure
-
-```
-citrea-vim/
-├── node_modules/
-├── public/
-│   ├── index.html
-│   ├── favicon.ico
-│   ├── manifest.json
-│   └── logo192.png
-├── src/
-│   ├── components/
-│   │   ├── Home.jsx
-│   │   ├── Navbar.jsx
-│   │   ├── TradingDashboard.jsx
-│   │   └── Footer.jsx
-│   ├── assets/
-│   │   ├── logo.png
-│   │   └── banner.jpg
-│   ├── utils/
-│   │   ├── web3.js
-│   │   └── constants.js
-│   ├── App.jsx
-│   ├── index.js
-│   └── index.css
-├── contracts/
-│   ├── CitreaVim.sol
-│   ├── Migrations.sol
-│   └── test/
-│       └── CitreaVim.test.js
-├── scripts/
-│   ├── deploy.js
-│   └── setup.js
-├── .gitignore
-├── package.json
-├── package-lock.json
-├── tailwind.config.js
-├── postcss.config.js
-├── hardhat.config.js
-├── README.md
-└── .env
-```
-
----
 
 ## Contributing
-
-We welcome your contributions! To get started:
 
 1. Fork the repo
 2. Create a new branch: `git checkout -b feature-name`
