@@ -1,20 +1,4 @@
-Here is your content perfectly formatted as a `README.md` file:
-
-````markdown
-# Citrea-Vim: Trustless Bitcoin Options Trading on Citrea zkEVM
-
-![Citrea-Vim Logo](src/assets/logo.png)
-
-**Built for the Citrea WaveHack Buildathon - Wave 1 Submission**  
-**Launch Date:** June 29, 2025  
-**Author:** [Your Name or Team Name]  
-**GitHub:** [Your GitHub Repository URL]  
-
-Welcome to **Citrea-Vim**, a pioneering trustless, on-chain platform for trading Bitcoin options using Citrea’s zkEVM technology. This project transforms Bitcoin’s liquidity into a DeFi powerhouse, offering secure, non-custodial call and put options trading with real-time pricing and DeFi composability. Built during the Citrea WaveHack, Citrea-Vim showcases innovative use cases for Citrea’s Layer 2 solution, bridging Bitcoin’s security with advanced financial tools.
-
----
-
-## What is Citrea-Vim?
+# Citrea-Vim
 
 Citrea-Vim is your gateway to decentralized Bitcoin options trading. Leveraging Citrea’s zero-knowledge rollup and zkEVM, it enables users to trade options without intermediaries, secured by zero-knowledge proofs. The sleek React frontend, styled with Tailwind CSS, provides a modern, dark-themed interface with teal accents, featuring a trading dashboard, portfolio tracker, and wallet integration via MetaMask on Citrea Testnet.
 
@@ -216,10 +200,3 @@ See the [LICENSE.md](LICENSE.md) file for details.
 * **UI Preview**: Real-time trading dashboard in a dark mode layout with teal charts and portfolio analytics
 
 ---
-
-*This README will evolve as Citrea-Vim grows. Stay tuned for future updates and WaveHack progress milestones.*
-
-```
-
-Let me know if you'd like to auto-generate the logo banner or update it with contributors, changelogs, or deployment links!
-```
