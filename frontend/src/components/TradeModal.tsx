@@ -2,6 +2,7 @@ import React, { useState, Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 
 interface Option {
+  id: number;
   type: 'Call' | 'Put';
   strikePrice: number;
   expiry: string;
@@ -10,18 +11,21 @@ interface Option {
 }
 
 interface TradeModalProps {
-  option: Option;
+  option: Option | null;
   isOpen: boolean;
   onClose: () => void;
+  onTrade: (option: Option, quantity: number) => void;
 }
 
-const TradeModal: React.FC<TradeModalProps> = ({ option, isOpen, onClose }) => {
+const TradeModal: React.FC<TradeModalProps> = ({ option, isOpen, onClose, onTrade }) => {
   const [amount, setAmount] = useState<number>(0);
   const [action, setAction] = useState<'Buy' | 'Sell'>('Buy');
 
   const handleTrade = () => {
-    console.log(`Mock Trade: ${action} ${amount} ${option.type} options at $${option.strikePrice}`);
-    onClose();
+    if (option) {
+      onTrade(option, amount);
+      onClose();
+    }
   };
 
   return (
@@ -50,15 +54,15 @@ const TradeModal: React.FC<TradeModalProps> = ({ option, isOpen, onClose }) => {
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel className="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md text-left">
-                <Dialog.Title as="h3" className="text-lg font-semibold text-white">
-                  Trade {option.type} Option
+                <Dialog.Title as="h3" className="text-lg font-semibold text-teal-300">
+                  Trade {option?.type} Option #{option?.id}
                 </Dialog.Title>
-                <div className="mt-4 space-y-2 text-gray-300">
-                  <p>Strike Price: ${option.strikePrice.toLocaleString()}</p>
-                  <p>Expiry: {option.expiry}</p>
-                  <p>Premium: {option.premium} cBTC</p>
+                <div className="mt-4 space-y-2 text-teal-300">
+                  <p>Strike Price: ${option?.strikePrice.toLocaleString()}</p>
+                  <p>Expiry: {option?.expiry}</p>
+                  <p>Premium: {option?.premium} cBTC</p>
                   <label className="block">
-                    Amount:
+                    Quantity:
                     <input
                       type="number"
                       value={amount}
@@ -71,17 +75,13 @@ const TradeModal: React.FC<TradeModalProps> = ({ option, isOpen, onClose }) => {
                   <div className="flex space-x-4 mt-2">
                     <button
                       onClick={() => setAction('Buy')}
-                      className={`flex-1 py-2 rounded-lg ${
-                        action === 'Buy' ? 'bg-yellow-400 text-gray-900' : 'bg-gray-600 text-gray-300'
-                      }`}
+                      className={`flex-1 py-2 rounded-lg ${action === 'Buy' ? 'bg-teal-500 text-gray-900' : 'bg-gray-600 text-gray-300'}`}
                     >
                       Buy
                     </button>
                     <button
                       onClick={() => setAction('Sell')}
-                      className={`flex-1 py-2 rounded-lg ${
-                        action === 'Sell' ? 'bg-yellow-400 text-gray-900' : 'bg-gray-600 text-gray-300'
-                      }`}
+                      className={`flex-1 py-2 rounded-lg ${action === 'Sell' ? 'bg-teal-500 text-gray-900' : 'bg-gray-600 text-gray-300'}`}
                     >
                       Sell
                     </button>
@@ -96,7 +96,7 @@ const TradeModal: React.FC<TradeModalProps> = ({ option, isOpen, onClose }) => {
                   </button>
                   <button
                     onClick={handleTrade}
-                    className="px-4 py-2 bg-yellow-400 text-gray-900 rounded-lg hover:bg-yellow-500"
+                    className="px-4 py-2 bg-teal-500 text-gray-900 rounded-lg hover:bg-teal-600"
                   >
                     Confirm
                   </button>
