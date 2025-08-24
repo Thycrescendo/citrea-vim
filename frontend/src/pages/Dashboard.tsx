@@ -1,33 +1,71 @@
 import React, { useState, useEffect } from 'react';
 import OptionCard from '../components/OptionCard';
 import TradeModal from '../components/TradeModal';
+import { ethers } from 'ethers';
+import { getContract } from '../ethersSetup';
+
+declare global {
+  interface Window {
+    ethereum?: any;
+  }
+}
 
 const Dashboard: React.FC = () => {
   const [selectedOption, setSelectedOption] = useState<null | { id: number; type: 'Call' | 'Put'; strikePrice: number; expiry: string; premium: number; liquidity: number }>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeNav, setActiveNav] = useState<string>('Home');
-  const [walletBalance, setWalletBalance] = useState<number>(10000); // Virtual BTC balance
+  const [walletBalance, setWalletBalance] = useState<number>(10000); // Virtual BTC balance in cBTC
   const [portfolio, setPortfolio] = useState<{ id: number; type: 'Call' | 'Put'; quantity: number }[]>([]);
+  const [options, setOptions] = useState<{ id: number; type: 'Call' | 'Put'; strikePrice: number; expiry: string; premium: number; liquidity: number }[]>([]);
+  const [isConnected, setIsConnected] = useState<boolean>(false);
 
-  const options = [
-    { id: 1, type: 'Call' as const, strikePrice: 60000, expiry: '2025-08-15', premium: 500, liquidity: 1000 },
-    { id: 2, type: 'Put' as const, strikePrice: 58000, expiry: '2025-08-15', premium: 450, liquidity: 800 },
-    { id: 3, type: 'Call' as const, strikePrice: 62000, expiry: '2025-08-20', premium: 550, liquidity: 1200 },
-  ];
+  // Fetch options from contract on mount
+  useEffect(() => {
+    const init = async () => {
+      try {
+        const contract = getContract();
+        const optionCount = await contract.optionCount();
+        const fetchedOptions = [];
+        for (let i = 1; i <= optionCount; i++) {
+          const [strikePrice, premium, expiry, isCall, liquidity] = await contract.getOption(i);
+          fetchedOptions.push({
+            id: i,
+            type: isCall ? 'Call' : 'Put',
+            strikePrice: Number(strikePrice),
+            expiry: new Date(Number(expiry) * 1000).toISOString().split('T')[0],
+            premium: Number(premium),
+            liquidity: Number(liquidity),
+          });
+        }
+        setOptions(fetchedOptions);
+      } catch (error) {
+        console.error('Error fetching options:', error);
+        // Fallback to virtual data if contract fails
+        setOptions([
+          { id: 1, type: 'Call', strikePrice: 60000, expiry: '2025-08-15', premium: 500, liquidity: 1000 },
+          { id: 2, type: 'Put', strikePrice: 58000, expiry: '2025-08-15', premium: 450, liquidity: 800 },
+          { id: 3, type: 'Call', strikePrice: 62000, expiry: '2025-08-20', premium: 550, liquidity: 1200 },
+        ]);
+      }
+    };
+    init();
+  }, []);
 
-  const collections = [
-    { name: 'Rare BTC NFTs', items: 5, value: 2500 },
-    { name: 'BTC Art', items: 3, value: 1800 },
-  ];
+  // Connect to MetaMask
+  const connectWallet = async () => {
+    try {
+      await window.ethereum?.request({ method: 'eth_requestAccounts' });
+      setIsConnected(true);
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const balance = await provider.getBalance(await provider.getSigner().getAddress());
+      setWalletBalance(Number(ethers.utils.formatEther(balance))); // Convert to ETH (mock as cBTC)
+    } catch (error) {
+      console.error('Wallet connection failed:', error);
+      setIsConnected(false);
+    }
+  };
 
-  const topSellers = [
-    { name: 'TraderX', volume: 3500, rating: 4.5 },
-    { name: 'CryptoKing', volume: 2800, rating: 4.2 },
-  ];
-
-  const assets = ['Bitcoin', 'Ethereum', 'XRP', 'Litecoin', 'Cardano'];
-
-  // Mock trade execution
+  // Mock trade execution (to be replaced with contract call)
   const executeTrade = (option: typeof selectedOption, quantity: number) => {
     if (walletBalance >= option!.premium * quantity) {
       setWalletBalance(walletBalance - option!.premium * quantity);
@@ -50,8 +88,22 @@ const Dashboard: React.FC = () => {
       .animate-bounce { animation: bounce 1.5s infinite; }
     `;
     document.head.appendChild(styleSheet);
-    return () => document.head.removeChild(styleSheet);
+    return () => {
+      document.head.removeChild(styleSheet); // Proper cleanup
+    };
   }, []);
+
+  const collections = [
+    { name: 'Rare BTC NFTs', items: 5, value: 2500 },
+    { name: 'BTC Art', items: 3, value: 1800 },
+  ];
+
+  const topSellers = [
+    { name: 'TraderX', volume: 3500, rating: 4.5 },
+    { name: 'CryptoKing', volume: 2800, rating: 4.2 },
+  ];
+
+  const assets = ['Bitcoin', 'Ethereum', 'XRP', 'Litecoin', 'Cardano'];
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
@@ -110,12 +162,20 @@ const Dashboard: React.FC = () => {
         {/* Portfolio Tracker */}
         <div className="mt-10 bg-gray-800 p-6 rounded-lg shadow-md border border-teal-700 animate-fade-in">
           <h3 className="text-lg font-semibold text-teal-300 mb-4">Portfolio</h3>
-          <p className="text-teal-300">BTC Balance: {walletBalance} cBTC</p>
+          <p className="text-teal-300">BTC Balance: {walletBalance.toFixed(2)} cBTC {isConnected && '(Connected)'}</p>
           <ul className="space-y-2 text-teal-300">
             {portfolio.map((item, index) => (
               <li key={index}>{item.type} Option #{item.id} - Quantity: {item.quantity}</li>
             ))}
           </ul>
+          {!isConnected && (
+            <button
+              onClick={connectWallet}
+              className="mt-4 w-full bg-teal-500 text-gray-900 py-2 rounded-lg hover:bg-teal-600"
+            >
+              Connect Wallet
+            </button>
+          )}
         </div>
 
         {/* Additional Activities */}
